@@ -1,0 +1,19 @@
+{
+    "name": "nixn/php-util",
+    "description": "PHP language utilities, mostly to code more in functional style.",
+    "type": "library",
+    "require": {
+        "php": "^8.2"
+    },
+    "authors": [
+        {
+            "name": "nix"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "nixn\\php\\": "src/"
+        }
+    }
+}
