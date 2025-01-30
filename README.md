@@ -187,6 +187,32 @@ echo (new Pipe('NOW')) // wrap initial value
 // prints: 2026
 ```
 
+### With
+
+A `With` object wraps an object and can be used to call any method on it with chaining support (handled by the wrapper).
+Note that any value returned by the method calls is discarded!
+
+```php
+With::new(mysqli::class, 'localhost', 'db_user', 'db_password')
+->set_charset('utf8mb4')
+->select_db('log')
+->autocommit(false)
+->begin_transaction()
+->execute_query('INSERT INTO ping')
+->execute_query('INSERT INTO pong')
+->commit()
+->close();
+```
+
+Or just use it for initialization calls and unwrap it then:
+```php
+$mysql = With::new(mysqli::class, 'localhost', 'db_user', 'db_password')
+->set_charset('utf8mb4')
+->select_db('log')
+->autocommit(false)
+->object; // unwrap
+```
+
 ## License
 Copyright © 2025 nix <https://keybase.io/nixn>
 

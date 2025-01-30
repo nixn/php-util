@@ -15,5 +15,10 @@
         "psr-4": {
             "nixn\\php\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.1.x-dev"
+        }
     }
 }
