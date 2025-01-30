@@ -3,7 +3,7 @@
     "description": "PHP language utilities, mostly to code more in functional style.",
     "type": "library",
     "require": {
-        "php": "^8.2"
+        "php": ">=8.2"
     },
     "authors": [
         {

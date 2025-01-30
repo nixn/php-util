@@ -1,6 +1,7 @@
 <?php
 namespace nixn\php;
 
+/** @since 1.0 */
 final class Str
 {
 	private function __construct()
@@ -11,6 +12,7 @@ final class Str
 	 * @param string $string the original string
 	 * @param string $prefix the prefix to remove
 	 * @return string the resulting string
+	 * @since 1.0
 	 */
 	public static function trim_prefix(string $string, string $prefix): string
 	{
@@ -22,6 +24,7 @@ final class Str
 	 * @param string $string the original string
 	 * @param string $suffix the suffix to remove
 	 * @return string the resulting string
+	 * @since 1.0
 	 */
 	public static function trim_suffix(string $string, string $suffix): string
 	{

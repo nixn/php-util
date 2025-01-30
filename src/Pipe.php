@@ -9,14 +9,16 @@ namespace nixn\php;
  * echo (new Pipe('NOW')) // wrap initial value
  * (strtolower(...)) // map through strtolower() => 'now'
  * ->new(DateTimeImmutable::class, Pipe::PLACEHOLDER, DateTimeZone::UTC) // create class
- * ->format("Y_m_d") // => '2025_01_01' (that was 'now' not long ago...)
+ * ->format("Y_m_d") // calls 'format' method => '2025_01_01' (that was 'now' not long ago...)
  * (str_replace(...), '_', '-') // => '2025-01-01'
  * (explode(...), '-', Pipe::PLACEHOLDER, 2) // => ['2025', '01-01']
  * ->get(0) // => '2025'
  * (intval(...)) // => 2025 (still wrapped)
- * ->value; // unwrap => 2025
- * // prints: 2025
+ * (fn($x) => $x + 1) // => 2026
+ * ->value; // unwrap => 2026
+ * // prints: 2026
  * ```
+ * @since 1.0
  */
 final class Pipe
 {
@@ -52,6 +54,7 @@ final class Pipe
 	/**
 	 * calls `new $class(...)` with the current value placed last or to the first PLACEHOLDER argument (only once!)
 	 * @param class-string $class
+	 * @since 1.0
 	 */
 	public function new(string $class, mixed ... $args): self
 	{
@@ -62,6 +65,7 @@ final class Pipe
 	 * Returns the class field or array element with key `$key`.
 	 * @param string|int $key the key. when it is an integer, array access is used automatically.
 	 * @param bool $array_access whether to use array access
+	 * @since 1.0
 	 */
 	public function get(string|int $key, bool $array_access = false): self
 	{
@@ -71,6 +75,6 @@ final class Pipe
 
 	public function __toString(): string
 	{
-		// TODO: Implement __toString() method.
+		return "$this->value";
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 namespace nixn\php;
 
+/** @since 1.0 */
 enum Partial
 {
 	case PLACEHOLDER;
@@ -17,6 +18,7 @@ enum Partial
 	 * @param callable $callable
 	 * @param mixed ...$args
 	 * @return callable
+	 * @since 1.0
 	 */
 	public static function partial(callable $callable, mixed ...$args): callable
 	{

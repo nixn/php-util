@@ -1,6 +1,7 @@
 <?php
 namespace nixn\php;
 
+/** @since 1.0 */
 final class Arr
 {
 	private function __construct()
@@ -11,6 +12,7 @@ final class Arr
 	 * @param array $array the source array
 	 * @param string|int ...$keys the keys for the values to retain
 	 * @return array the resulting array
+	 * @since 1.0
 	 */
 	public static function pick(array $array, string|int ...$keys): array
 	{
@@ -23,6 +25,7 @@ final class Arr
 	 * @param callable(mixed, string|int): bool $predicate called with every value (until found)
 	 * @param bool $return_key whether to return the key instead of the value
 	 * @return mixed the value or the key for a found item, null otherwise
+	 * @since 1.0
 	 */
 	public static function find_by(array $array, callable $predicate, bool $return_key = false): mixed
 	{
@@ -35,6 +38,7 @@ final class Arr
 	/**
 	 * Like array_reduce(), but the callback passes the key of the element, too.
 	 * @param callable(mixed $carry, mixed $value, string|int $key): mixed $callback
+	 * @since 1.0
 	 */
 	public static function reduce(array $array, callable $callback, mixed $initial = null): mixed
 	{
@@ -54,6 +58,7 @@ final class Arr
 	 * Like implode()/join() in legacy syntax, but outputs the keys too and takes an additional parameter `$kv_sep`.
 	 * @param string $sep the separator of elements
 	 * @param string $kv_sep the separator for key and value
+	 * @since 1.0
 	 */
 	public static function kvjoin(array $data, string $sep = ', ', string $kv_sep = '='): string
 	{
@@ -72,6 +77,7 @@ final class Arr
 	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = array_first($array)`
 	 * @param array $array the source array
 	 * @return array ['k' => <key>/null, 'v' => <value>/null]
+	 * @since 1.0
 	 */
 	public static function first(array $array): array
 	{
@@ -86,6 +92,7 @@ final class Arr
 	 * @param array $array the source array
 	 * @param string|int ...$ks the keys
 	 * @return array ['k' => <key>/null, 'v' => <value>/null]
+	 * @since 1.0
 	 */
 	public static function find(array $array, string|int ...$ks): array
 	{

@@ -1,6 +1,7 @@
 <?php
 namespace nixn\php;
 
+/** @since 1.0 */
 final class Util
 {
 	private function __construct() {}
@@ -9,6 +10,7 @@ final class Util
 	 * Just returns the input value. Useful in functional programming style.
 	 * @param mixed $v the input value
 	 * @return mixed the input value
+	 * @since 1.0
 	 */
 	public static function identity(mixed $v): mixed
 	{
@@ -38,6 +40,7 @@ final class Util
 	 *        if false, $fn === null means $v is returned unchanged (like {@link identity()}).
 	 * @param mixed ...$nots the values which count as a 'not' value (mostly useful: null, false, '', 0). see {@link map()}
 	 * @return U|T|null the possibly mapped value
+	 * @since 1.0
 	 */
 	public static function map_nots(mixed $v, ?callable $fn = null, bool $null_on_not = false, bool $func = false, mixed ... $nots): mixed
 	{
@@ -60,6 +63,7 @@ final class Util
 	 * @param bool $empty whether an empty string is a falsy value
 	 * @param bool $zero whether 0 (zero) is a falsy value
 	 * @return U|T|null the possibly mapped value
+	 * @since 1.0
 	 */
 	public static function map(mixed $v, ?callable $fn = null, bool $null_on_not = false, bool $func = false, bool $null = true, bool $false = false, bool $empty = false, bool $zero = false): mixed
 	{
@@ -68,6 +72,7 @@ final class Util
 
 	/**
 	 * Like {@link when()}, but the the falsy values are given as arguments (`$nots`).
+	 * @since 1.0
 	 */
 	public static function when_nots(mixed $test, mixed $v, ?callable $fn = null, mixed ... $nots): mixed
 	{
@@ -92,6 +97,7 @@ final class Util
 	 * @param bool $empty whether an empty string is a falsy value
 	 * @param bool $zero whether 0 (zero) is a falsy value
 	 * @return mixed the value, possibly mapped, or null if `$test` was falsy
+	 * @since 1.0
 	 */
 	public static function when(mixed $test, mixed $v, ?callable $fn = null, bool $null = true, bool $false = true, bool $empty = false, bool $zero = false): mixed
 	{
@@ -106,6 +112,7 @@ final class Util
 	 * @param callable(T): ?T $get_parent the function to get the parent node of a child node
 	 * @param ?callable(T): bool $while an optional check when to stop (`$while` must return false to not rise further in the tree)
 	 * @return \Generator<T> the iterable, directly usable in `foreach(...)`
+	 * @since 1.0
 	 */
 	public static function tree_path(mixed $element, callable $get_parent, ?callable $while = null): \Generator
 	{
@@ -122,6 +129,7 @@ final class Util
 	 * @template T the class type
 	 * @param class-string<T> $class the class name
 	 * @return callable(mixed ...$args): T the function (Closure) to create the class
+	 * @since 1.0
 	 */
 	public static function new(string $class): \Closure
 	{
