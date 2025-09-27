@@ -38,14 +38,14 @@ $callback = fn($carry, $v, $k) => "$carry|$k";
 Arr::reduce($array, $callback, "") // => "|a|b|1|2"
 ```
 
-* `kvjoin(array $data, string $sep = ', ', string $kv_sep = '='): string`<br>
+* `kvjoin(iterable $iterable, string $sep = ', ', string $kv_sep = '='): string`<br>
   Like implode()/join() in legacy syntax, but outputs the keys too and takes an additional parameter `$kv_sep`.
 ```php
 $array = ['a' => 'A', 'b' => 'B', 1 => 'one', 2 => 'two'];
 Arr::kvjoin($array) // => "a=A, b=B, 1=one, 2=two"
 ```
 
-* `first(array $array): array`<br>
+* `first(iterable $iterable): array`<br>
   Returns the first mapping (element) of an array as key and value in an array, or null/null if the array is empty.
 ```php
 $array = ['a' => 'A', 'b' => 'B', 1 => 'one', 2 => 'two'];
@@ -62,7 +62,7 @@ Arr::find($array, 'c', 1) // => ['k' => 1, 'v' => 'one']
 Arr::find($array, 'c', 3) // => ['k' => null, 'v' => null]
 ```
 
-The return value for the last two functions are well suited for array destruction and safety on searching:
+The return value for the last two functions is well suited for array destruction and safety on searching:
 ```php
 ['k' => $key, 'v' => $value] = Arr::find($array, 2, 'b');
 if ($key === null)

@@ -74,7 +74,7 @@ final class Arr
 	 * @param string $kv_sep the separator for key and value
 	 * @since 1.0
 	 */
-	public static function kvjoin(array $data, string $sep = ', ', string $kv_sep = '='): string
+	public static function kvjoin(iterable $data, string $sep = ', ', string $kv_sep = '='): string
 	{
 		$first = true;
 		$str = '';
@@ -88,21 +88,21 @@ final class Arr
 
 	/**
 	 * Returns the first mapping (element) of an array as key and value in an array, or null/null if the array is empty.
-	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = array_first($array)`
-	 * @param array $array the source array
+	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = Arr::first($array)`
+	 * @param iterable $iterable the source iterable
 	 * @return array ['k' => <key>/null, 'v' => <value>/null]
 	 * @since 1.0
 	 */
-	public static function first(array $array): array
+	public static function first(iterable $iterable): array
 	{
-		foreach ($array as $k => $v)
+		foreach ($iterable as $k => $v)
 			return compact('k', 'v');
 		return ['k' => null, 'v' => null];
 	}
 
 	/**
 	 * Searches for a mapping in the array whose key is one of $keys, returns the key and the value or null/null (if not found) as an array.
-	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = array_find($array, 'key1', 'key2')`
+	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = Arr::find($array, 'key1', 'key2')`
 	 * @param array $array the source array
 	 * @param string|int ...$ks the keys
 	 * @return array ['k' => <key>/null, 'v' => <value>/null]
