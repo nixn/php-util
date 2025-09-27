@@ -22,8 +22,8 @@ final class Util
 		$nots = [];
 		if ($null) $nots[] = null;
 		if ($false) $nots[] = false;
-		if ($empty) $nots[] = '';
-		if ($zero) $nots[] = 0;
+		if ($empty) { $nots[] = ''; $nots[] = []; }
+		if ($zero) { $nots[] = 0; $nots[] = 0.0; }
 		return $nots;
 	}
 
@@ -67,7 +67,7 @@ final class Util
 	 */
 	public static function map(mixed $v, ?callable $fn = null, bool $null_on_not = false, bool $func = false, bool $null = true, bool $false = false, bool $empty = false, bool $zero = false): mixed
 	{
-		return self::map_nots($v, $fn, $null_on_not, $func, ...self::nots($null, $false, $empty, $zero));
+		return self::map_nots($v, $fn, $null_on_not, $func, ...self::nots(null: $null, false: $false, empty: $empty, zero: $zero));
 	}
 
 	/**
@@ -128,7 +128,7 @@ final class Util
 	 * PHP does not support `new MyClass(...)`, so this is a workaround: Util::new(MyClass::class)`
 	 * @template T the class type
 	 * @param class-string<T> $class the class name
-	 * @return callable(mixed ...$args): T the function (Closure) to create the class
+	 * @return \Closure(mixed ...$args): T the function (Closure) to create the class
 	 * @since 1.0
 	 */
 	public static function new(string $class): \Closure
