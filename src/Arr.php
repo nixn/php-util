@@ -36,20 +36,34 @@ final class Arr
 	}
 
 	/**
-	 * Like array_reduce(), but the callback passes the key of the element, too.
+	 * Like {@link \array_reduce()}, but accepts an iterable and the callback passes the key of the element, too.
+	 * @param iterable $iterable the elements to reduce
 	 * @param callable(mixed $carry, mixed $value, string|int $key): mixed $callback
+	 * @param mixed $initial an optional initial value. if not passed, the first element is taken as the initial value and the `$callback` is not called for it
+	 * @param mixed $on_empty (since 1.2) whether to return the initial value iff the iterable is empty
+	 * @return mixed the reduced value, the initial value or the on_empty value (if passed)
+	 * @throws \RuntimeException when the iterable is empty, no initial value was passed and no_empty was not given
 	 * @since 1.0
 	 */
-	public static function reduce(array $array, callable $callback, mixed $initial = null): mixed
+	public static function reduce(iterable $iterable, callable $callback, mixed $initial = new self(), bool $on_empty = false): mixed
 	{
+		$initial_set = !($initial instanceof self);
+		$has_initial = $initial_set && !$on_empty;
 		$first = true;
-		foreach ($array as $k => $v) {
-			if ($first && $initial === null) {
+		foreach ($iterable as $k => $v) {
+			if ($first) {
 				$first = false;
-				$initial = $v;
-				continue;
+				if (!$has_initial) {
+					$initial = $v;
+					continue;
+				}
 			}
 			$initial = $callback($initial, $v, $k);
+		}
+		if ($first && !$has_initial) {
+			if ($initial_set)
+				return $initial;
+			throw new \RuntimeException('no elements and no initial value');
 		}
 		return $initial;
 	}

@@ -30,8 +30,8 @@ Arr::find_by($array, $predicate) // => 'two'
 Arr::find_by($array, $predicate, true) // => 2
 ```
 
-* `reduce(array $array, callable $callback, mixed $initial = null): mixed`<br>
-  Like array_reduce(), but the callback passes the key of the element, too.
+* `reduce(iterable $iterable, callable $callback, mixed $initial = <none>, bool $on_empty = false): mixed`<br>
+  Like array_reduce(), but the callback passes the key of the element, too. Also, more control over the return value.
 ```php
 $array = ['a' => 'A', 'b' => 'B', 1 => 'one', 2 => 'two'];
 $callback = fn($carry, $v, $k) => "$carry|$k";
