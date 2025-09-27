@@ -33,8 +33,12 @@ enum Partial
 				else
 					$final_args[] = $arg;
 			}
-			foreach ($placeholder_args as $arg)
-				$final_args[] = $arg;
+			foreach ($placeholder_args as $key => $arg) {
+				if (is_string($key))
+					$final_args[$key] = $arg;
+				else
+					$final_args[] = $arg;
+			}
 			return $callable(...$final_args);
 		};
 	}
