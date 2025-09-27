@@ -4,6 +4,7 @@ namespace nixn\php;
 /** @since 1.0 */
 final class Util
 {
+	/** @codeCoverageIgnore */
 	private function __construct() {}
 
 	/**

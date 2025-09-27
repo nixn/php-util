@@ -4,8 +4,8 @@ namespace nixn\php;
 /** @since 1.0 */
 final class Arr
 {
-	private function __construct()
-	{}
+	/** @codeCoverageIgnore */
+	private function __construct() {}
 
 	/**
 	 * Returns a new array with only the key => value mappings left, whose keys are in $keys.

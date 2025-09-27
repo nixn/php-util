@@ -5,6 +5,9 @@
     "require": {
         "php": ">=8.2"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5.41"
+    },
     "authors": [
         {
             "name": "nix"
@@ -14,6 +17,11 @@
     "autoload": {
         "psr-4": {
             "nixn\\php\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
         }
     },
     "extra": {

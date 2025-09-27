@@ -4,8 +4,8 @@ namespace nixn\php;
 /** @since 1.0 */
 final class Str
 {
-	private function __construct()
-	{}
+	/** @codeCoverageIgnore */
+	private function __construct() {}
 
 	/**
 	 * Trims a string prefix when it matches. Example: `trim_prefix("Hello all", "Hello ") === "all"`.
