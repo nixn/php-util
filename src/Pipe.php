@@ -8,7 +8,7 @@ namespace nixn\php;
  * ```
  * echo (new Pipe('NOW')) // wrap initial value
  * (strtolower(...)) // map through strtolower() => 'now'
- * ->new(DateTimeImmutable::class, Pipe::PLACEHOLDER, DateTimeZone::UTC) // create class
+ * ->new(DateTimeImmutable::class, Pipe::PLACEHOLDER, new DateTimeZone('UTC')) // create class
  * ->format("Y_m_d") // calls 'format' method => '2025_01_01' (that was 'now' not long ago...)
  * (str_replace(...), '_', '-') // => '2025-01-01'
  * (explode(...), '-', Pipe::PLACEHOLDER, 2) // => ['2025', '01-01']
@@ -63,13 +63,29 @@ final class Pipe
 
 	/**
 	 * Returns the class field or array element with key `$key`.
-	 * @param string|int $key the key. when it is an integer, array access is used automatically.
+	 * @param string|int $key the key. When it is an integer, array access is used automatically.
 	 * @param bool $array_access whether to use array access
 	 * @since 1.0
 	 */
 	public function get(string|int $key, bool $array_access = false): self
 	{
 		$this->value = $array_access || is_int($key) ? $this->value[$key] : $this->value->{$key};
+		return $this;
+	}
+
+	/**
+	 * Sets the class field or array element with key `$key` to `$value`.
+	 * @param string|int $key the key. When it is an integer, array access is used automatically.
+	 * @param mixed $value the value to be set for the `$key`.
+	 * @param bool $array_access whether to use array access
+	 * @since 1.2
+	 */
+	public function set(string|int $key, mixed $value, bool $array_access = false): self
+	{
+		if ($array_access || is_int($key))
+			$this->value[$key] = $value;
+		else
+			$this->value->{$key} = $value;
 		return $this;
 	}
 

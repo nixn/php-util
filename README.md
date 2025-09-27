@@ -176,7 +176,7 @@ Example:
 <?php
 echo (new Pipe('NOW')) // wrap initial value
 (strtolower(...)) // map through strtolower() => 'now'
-->new(DateTimeImmutable::class, Pipe::PLACEHOLDER, DateTimeZone::UTC) // create class
+->new(DateTimeImmutable::class, Pipe::PLACEHOLDER, new DateTimeZone('UTC')) // create class
 ->format("Y_m_d") // call 'format' method magically => '2025_01_01' (that was 'now' not long ago...)
 (str_replace(...), '_', '-') // => '2025-01-01'
 (explode(...), '-', Pipe::PLACEHOLDER, 2) // => ['2025', '01-01']
