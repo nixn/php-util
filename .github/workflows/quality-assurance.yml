@@ -32,12 +32,16 @@ jobs:
       - name: 'Setup Pages'
         uses: actions/configure-pages@v5
       - name: 'Upload results (${{ matrix.php }})'
+        id: deployment-${{ matrix.php }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'tests-output/coverage'
+          name: coverage-${{ matrix.php }}
       - name: 'Deploy to GitHub pages (${{ matrix.php }})'
-        id: deployment
+        id: deployment-${{ matrix.php }}
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: coverage-${{ matrix.php }}
   static-analysis:
     name: PHPStan checks (on PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
