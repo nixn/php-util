@@ -15,6 +15,7 @@
         "php": ">=8.2"
     },
     "require-dev": {
+        "phpdocumentor/shim": "^3.8",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "~11.5"
     },
@@ -29,7 +30,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpdocumentor/shim": true
+        }
     },
     "extra": {
         "branch-alias": {
@@ -43,6 +47,7 @@
             "phpunit"
         ],
         "stan": "phpstan",
-        "stan-tests": "phpstan analyse -c phpstan-tests.neon"
+        "stan-tests": "phpstan analyse -c phpstan-tests.neon",
+        "api-docs": "phpdoc"
     }
 }

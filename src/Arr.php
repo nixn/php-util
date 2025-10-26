@@ -1,7 +1,11 @@
 <?php
 namespace nixn\php;
 
-/** @since 1.0 */
+/**
+ * Utilities for arrays or iterables.
+ *
+ * @since 1.0
+ */
 final class Arr
 {
 	/** @codeCoverageIgnore */

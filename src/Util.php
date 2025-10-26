@@ -1,7 +1,11 @@
 <?php
 namespace nixn\php;
 
-/** @since 1.0 */
+/**
+ * Miscellaneous utilities.
+ *
+ * @since 1.0
+ */
 final class Util
 {
 	/** @codeCoverageIgnore */

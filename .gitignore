@@ -2,3 +2,6 @@
 /tests-output/
 /phpunit.xml
 /phpstan.neon
+/phpdoc.xml
+/.phpdoc/
+/api-docs/

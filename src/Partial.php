@@ -1,7 +1,11 @@
 <?php
 namespace nixn\php;
 
-/** @since 1.0 */
+/**
+ * Partial functions.
+ *
+ * @since 1.0
+ */
 enum Partial
 {
 	case PLACEHOLDER;
@@ -22,7 +26,7 @@ enum Partial
 	 */
 	public static function partial(callable $callable, mixed ...$args): callable
 	{
-		return function(mixed ... $placeholder_args) use ($callable, $args): mixed {
+		return static function(mixed ... $placeholder_args) use ($callable, $args): mixed {
 			$final_args = [];
 			foreach ($args as $key => $arg)
 			{

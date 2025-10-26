@@ -2,6 +2,8 @@
 namespace nixn\php;
 
 /**
+ * An object wrapper for chainable method calls.
+ *
  * @template T
  * @type With<T>
  * @since 1.1
