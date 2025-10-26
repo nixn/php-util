@@ -1,0 +1,44 @@
+name: Quality Assurance
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    name: PHPUnit tests (with coverage, on PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ '8.2', '8.3', '8.4', '8.5' ]
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+      - name: 'Set up PHP (${{ matrix.php }})'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: xdebug
+      - run: ./composer.phar install -n --no-progress -o
+      - run: ./composer.phar test+coverage
+  static-analysis:
+    name: PHPStan checks (on PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ '8.2', '8.3', '8.4', '8.5' ]
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 'Set up PHP (${{ matrix.php }})'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - run: ./composer.phar install -n --no-progress -o
+      - run: ./composer.phar stan
+      - run: ./composer.phar stan-tests
