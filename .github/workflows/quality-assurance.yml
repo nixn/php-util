@@ -6,14 +6,19 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   unit-tests:
-    name: PHPUnit tests (with coverage, on PHP ${{ matrix.php }})
+    name: PHPUnit tests + cov. (on PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php: [ '8.2', '8.3', '8.4', '8.5' ]
+    environment:
+      name: github-pages
+      url: '${{ steps.deployment.outputs.page_url }}/coverage/php-${{ matrix.php }}'
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v4
@@ -24,6 +29,15 @@ jobs:
           coverage: xdebug
       - run: ./composer.phar install -n --no-progress -o
       - run: ./composer.phar test+coverage
+      - name: 'Setup Pages'
+        uses: actions/configure-pages@v5
+      - name: 'Upload results (${{ matrix.php }})'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'tests-output/coverage'
+      - name: 'Deploy to GitHub pages (${{ matrix.php }})'
+        id: deployment
+        uses: actions/deploy-pages@v4
   static-analysis:
     name: PHPStan checks (on PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
