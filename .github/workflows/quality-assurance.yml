@@ -16,9 +16,6 @@ jobs:
     strategy:
       matrix:
         php: [ '8.2', '8.3', '8.4', '8.5' ]
-    environment:
-      name: github-pages
-      url: '${{ steps.deployment.outputs.page_url }}/coverage/php-${{ matrix.php }}'
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v4
@@ -35,12 +32,39 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'tests-output/coverage'
-          name: coverage-${{ matrix.php }}
-      - name: 'Deploy to GitHub pages (PHP ${{ matrix.php }})'
+          name: coverage-php-${{ matrix.php }}
+  deploy-pages:
+    name: Deploy coverage reports to Pages
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    environment:
+      name: github-pages
+      url: '${{ steps.deployment.outputs.page_url }}coverage/php-8.5/html/'
+    steps:
+      - name: 'Checkout (for repo metadata)'
+        uses: actions/checkout@v4
+      - name: 'Download artifacts'
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: 'Arrange artifacts into subdirectories'
+        run: |
+          set -e
+          mkdir -p site/coverage
+          for af in artifacts/coverage-* ; do
+            a=$(basename "$af")
+            mv "$af" "site/coverage/${a#coverage-}"
+          done
+      - name: 'Upload site artifact'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+          name: site
+      - name: 'Deploy to Pages'
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: coverage-${{ matrix.php }}
+          artifact_name: site
   static-analysis:
     name: PHPStan checks (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
