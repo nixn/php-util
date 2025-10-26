@@ -13,6 +13,7 @@ final class Arr
 	 * @param string|int ...$keys the keys for the values to retain
 	 * @return array the resulting array
 	 * @since 1.0
+	 * @phpstan-ignore missingType.iterableValue, missingType.iterableValue
 	 */
 	public static function pick(array $array, string|int ...$keys): array
 	{
@@ -26,6 +27,7 @@ final class Arr
 	 * @param bool $return_key whether to return the key instead of the value
 	 * @return mixed the value or the key for a found item, null otherwise
 	 * @since 1.0
+	 * @phpstan-ignore missingType.iterableValue
 	 */
 	public static function find_by(array $array, callable $predicate, bool $return_key = false): mixed
 	{
@@ -40,10 +42,11 @@ final class Arr
 	 * @param iterable $iterable the elements to reduce
 	 * @param callable(mixed $carry, mixed $value, string|int $key): mixed $callback
 	 * @param mixed $initial an optional initial value. if not passed, the first element is taken as the initial value and the `$callback` is not called for it
-	 * @param mixed $on_empty (since 1.2) whether to return the initial value iff the iterable is empty
+	 * @param bool $on_empty (since 1.2) whether to return the initial value iff the iterable is empty
 	 * @return mixed the reduced value, the initial value or the on_empty value (if passed)
 	 * @throws \RuntimeException when the iterable is empty, no initial value was passed and no_empty was not given
 	 * @since 1.0
+	 * @phpstan-ignore missingType.iterableValue
 	 */
 	public static function reduce(iterable $iterable, callable $callback, mixed $initial = new self(), bool $on_empty = false): mixed
 	{
@@ -58,7 +61,7 @@ final class Arr
 					continue;
 				}
 			}
-			$initial = $callback($initial, $v, $k);
+			$initial = $callback($initial, $v, $k); // @phpstan-ignore argument.type ($k is definitely of type string|int)
 		}
 		if ($first && !$has_initial) {
 			if ($initial_set)
@@ -70,9 +73,11 @@ final class Arr
 
 	/**
 	 * Like implode()/join() in legacy syntax, but outputs the keys too and takes an additional parameter `$kv_sep`.
+	 * @param iterable $data the elements to join
 	 * @param string $sep the separator of elements
 	 * @param string $kv_sep the separator for key and value
 	 * @since 1.0
+	 * @phpstan-ignore missingType.iterableValue
 	 */
 	public static function kvjoin(iterable $data, string $sep = ', ', string $kv_sep = '='): string
 	{
@@ -81,7 +86,7 @@ final class Arr
 		foreach ($data as $k => $v) {
 			if ($first) $first = false;
 			else $str .= $sep;
-			$str .= $k . $kv_sep . $v;
+			$str .= "$k$kv_sep$v"; // @phpstan-ignore encapsedStringPart.nonString, encapsedStringPart.nonString
 		}
 		return $str;
 	}
@@ -90,13 +95,14 @@ final class Arr
 	 * Returns the first mapping (element) of an array as key and value in an array, or null/null if the array is empty.
 	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = Arr::first($array)`
 	 * @param iterable $iterable the source iterable
-	 * @return array ['k' => <key>/null, 'v' => <value>/null]
+	 * @return array{k: string|int|null, v: mixed} ['k' => <key>/null, 'v' => <value>/null]
 	 * @since 1.0
+	 * @phpstan-ignore missingType.iterableValue
 	 */
 	public static function first(iterable $iterable): array
 	{
 		foreach ($iterable as $k => $v)
-			return compact('k', 'v');
+			return compact('k', 'v'); // @phpstan-ignore return.type
 		return ['k' => null, 'v' => null];
 	}
 
@@ -105,8 +111,9 @@ final class Arr
 	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = Arr::find($array, 'key1', 'key2')`
 	 * @param array $array the source array
 	 * @param string|int ...$ks the keys
-	 * @return array ['k' => <key>/null, 'v' => <value>/null]
+	 * @return array{k: string|int|null, v: mixed} ['k' => <key>/null, 'v' => <value>/null]
 	 * @since 1.0
+	 * @phpstan-ignore missingType.iterableValue
 	 */
 	public static function find(array $array, string|int ...$ks): array
 	{

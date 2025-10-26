@@ -29,7 +29,7 @@ final class Pipe
 	)
 	{}
 
-	public function __call(string $method, array $args): self
+	public function __call(string $method, array $args): self // @phpstan-ignore missingType.iterableValue
 	{
 		$this->value = $this->value->{$method}(...$args);
 		return $this;
@@ -69,7 +69,7 @@ final class Pipe
 	 */
 	public function get(string|int $key, bool $array_access = false): self
 	{
-		$this->value = $array_access || is_int($key) ? $this->value[$key] : $this->value->{$key};
+		$this->value = $array_access || is_int($key) ? $this->value[$key] : $this->value->{$key}; // @phpstan-ignore offsetAccess.nonOffsetAccessible
 		return $this;
 	}
 
@@ -83,7 +83,7 @@ final class Pipe
 	public function set(string|int $key, mixed $value, bool $array_access = false): self
 	{
 		if ($array_access || is_int($key))
-			$this->value[$key] = $value;
+			$this->value[$key] = $value; // @phpstan-ignore offsetAccess.nonOffsetAccessible
 		else
 			$this->value->{$key} = $value;
 		return $this;
@@ -91,6 +91,6 @@ final class Pipe
 
 	public function __toString(): string
 	{
-		return "$this->value";
+		return "$this->value"; // @phpstan-ignore encapsedStringPart.nonString
 	}
 }

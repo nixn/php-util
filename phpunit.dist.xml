@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd" cacheDirectory="tests-output/phpunit-cache">
+    <coverage>
+        <report>
+            <clover outputFile="tests-output/coverage/clover.xml"/>
+            <cobertura outputFile="tests-output/coverage/cobertura.xml"/>
+            <crap4j outputFile="tests-output/coverage/crap4j.xml"/>
+            <html outputDirectory="tests-output/coverage/html"/>
+            <php outputFile="tests-output/coverage/coverage.php"/>
+            <text outputFile="tests-output/coverage/coverage.txt"/>
+            <xml outputDirectory="tests-output/coverage/xml"/>
+        </report>
+    </coverage>
+    <testsuites>
+        <testsuite name="php-util test suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <junit outputFile="tests-output/junit-report.xml"/>
+    </logging>
+    <source>
+        <include>
+            <directory>src/</directory>
+        </include>
+    </source>
+</phpunit>

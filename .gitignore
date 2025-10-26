@@ -1,1 +1,4 @@
 /vendor/
+/tests-output/
+/phpunit.xml
+/phpstan.neon

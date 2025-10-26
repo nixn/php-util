@@ -19,7 +19,7 @@ final class PipeTest extends TestCase
 		$this->assertSame('2025-01-01T00:00:00', $pipe->value);
 		$pipe->new(\DateTimeImmutable::class, Pipe::PLACEHOLDER, new \DateTimeZone('UTC'));
 		$this->assertInstanceOf(\DateTimeImmutable::class, $pipe->value);
-		$pipe->format('Y_m_d');
+		$pipe->format('Y_m_d'); // @phpstan-ignore method.notFound
 		$this->assertSame('2025_01_01', $pipe->value);
 		$pipe(explode(...), '_', Pipe::PLACEHOLDER, 2);
 		$this->assertSame(['2025', '01_01'], $pipe->value);

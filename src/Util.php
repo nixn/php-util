@@ -18,7 +18,7 @@ final class Util
 		return $v;
 	}
 
-	private static function nots(bool $null, bool $false, bool $empty, bool $zero): array
+	private static function nots(bool $null, bool $false, bool $empty, bool $zero): array // @phpstan-ignore missingType.iterableValue
 	{
 		$nots = [];
 		if ($null) $nots[] = null;
@@ -34,7 +34,7 @@ final class Util
 	 * @template T type of the input value
 	 * @template U type of the mapped value
 	 * @param ?T $v the input value to be mapped
-	 * @param ?callable(T): U $fn the mapping function. `null` means {@link identity()} (return $v as-is)
+	 * @param ?callable(?T): U $fn the mapping function. `null` means {@link identity()} (return $v as-is)
 	 * @param bool $null_on_not whether to return null iff the input value matches one of the $nots
 	 * @param bool $func whether to test $fn on null as a 'not' value, too.
 	 *        if true, $fn === null means return $v unmapped (only useful with $null_on_not === true, which returns null then);
@@ -56,7 +56,7 @@ final class Util
 	 * @template T type of the input value
 	 * @template U type of the mapped value
 	 * @param ?T $v
-	 * @param ?callable(T): ?U $fn the mapping function. `null` means {@link identity()} (return $v as-is)
+	 * @param ?callable(?T): ?U $fn the mapping function. `null` means {@link identity()} (return $v as-is)
 	 * @param bool $null_on_not return null on falsy (as selected by $func, $null, $false, $empty and $zero)
 	 * @param bool $func whether $fn === null means falsy too
 	 * @param bool $null whether null is a falsy value
@@ -109,7 +109,7 @@ final class Util
 	 * For any node in a tree structure, get all parents (possibly up to a specific one) and return them from top to bottom
 	 * as an iterable (Generator): `foreach (tree_path($node) as $parent_node) {...}`
 	 * @template T the node type
-	 * @param T $element the starting node
+	 * @param ?T $element the starting node
 	 * @param callable(T): ?T $get_parent the function to get the parent node of a child node
 	 * @param ?callable(T): bool $while an optional check when to stop (`$while` must return false to not rise further in the tree)
 	 * @return \Generator<T> the iterable, directly usable in `foreach(...)`
@@ -134,6 +134,6 @@ final class Util
 	 */
 	public static function new(string $class): \Closure
 	{
-		return fn(...$args) => new $class(...$args);
+		return static fn(...$args) => new $class(...$args);
 	}
 }

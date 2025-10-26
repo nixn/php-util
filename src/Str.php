@@ -16,7 +16,7 @@ final class Str
 	 */
 	public static function trim_prefix(string $string, string $prefix): string
 	{
-		return $prefix === '' ? $string : preg_replace('#^' . preg_quote($prefix, '#') . '#', '', $string);
+		return $prefix === '' ? $string : preg_replace('#^' . preg_quote($prefix, '#') . '#', '', $string); // @phpstan-ignore return.type
 	}
 
 	/**
@@ -28,6 +28,6 @@ final class Str
 	 */
 	public static function trim_suffix(string $string, string $suffix): string
 	{
-		return $suffix === '' ? $string : preg_replace('#' . preg_quote($suffix, '#') . '$#', '', $string);
+		return $suffix === '' ? $string : preg_replace('#' . preg_quote($suffix, '#') . '$#', '', $string); // @phpstan-ignore return.type
 	}
 }

@@ -9,7 +9,7 @@ namespace nixn\php;
 final class With
 {
 	/**
-	 * @template W
+	 * @template W of object
 	 * @param class-string<W> $class the class name to create
 	 * @param mixed ...$args constructor arguments
 	 * @return With<W> the created object, wrapped into `With`
@@ -17,15 +17,23 @@ final class With
 	 */
 	public static function new(string $class, mixed ...$args): With
 	{
-		return new self(new $class(...$args));
+		return new self(new $class(...$args)); // @phpstan-ignore return.type
 	}
 
+	/**
+	 * @template W of object
+	 * @param W $object the object to wrap
+	 */
 	public function __construct(
 		public object $object,
 	)
 	{}
 
-	public function __call(string $method, array $args)
+	/**
+	 * @return $this
+	 * @phpstan-ignore missingType.iterableValue
+	 */
+	public function __call(string $method, array $args): self
 	{
 		$this->object->{$method}(...$args);
 		return $this;
@@ -33,6 +41,6 @@ final class With
 
 	public function __toString(): string
 	{
-		return "$this->object";
+		return "$this->object"; // @phpstan-ignore encapsedStringPart.nonString, return.type
 	}
 }
