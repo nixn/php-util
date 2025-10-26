@@ -1,19 +1,22 @@
 {
     "name": "nixn/php-util",
-    "description": "PHP language utilities, mostly to code more in functional style.",
     "type": "library",
+    "description": "PHP language utilities, mostly to code more in functional style.",
+    "keywords": ["functional", "language", "utilities", "array", "string", "pipe", "with", "partial"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nix",
+            "homepage": "https://keybase.io/nixn",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": ">=8.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.5.42"
     },
-    "authors": [
-        {
-            "name": "nix"
-        }
-    ],
-    "license": "MIT",
     "autoload": {
         "psr-4": {
             "nixn\\php\\": "src/"
