@@ -37,6 +37,7 @@ jobs:
           path: 'tests-output/coverage'
           name: coverage-${{ matrix.php }}
       - name: 'Deploy to GitHub pages (PHP ${{ matrix.php }})'
+        id: deployment
         uses: actions/deploy-pages@v4
         with:
           artifact_name: coverage-${{ matrix.php }}
