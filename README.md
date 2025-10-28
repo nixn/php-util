@@ -1,6 +1,15 @@
 # php-util
 A PHP library with utility functions, mostly useful when coding in functional style, but also some other stuff.
 
+![GitHub License](https://img.shields.io/github/license/nixn/php-util)
+[![Quality Assurance](https://github.com/nixn/php-util/actions/workflows/quality-assurance.yml/badge.svg)](https://github.com/nixn/php-util/actions/workflows/quality-assurance.yml)
+[![Packagist Version](https://img.shields.io/packagist/v/nixn/php-util)][packagist]
+[![Packagist Downloads](https://img.shields.io/packagist/dt/nixn/php-util?color=blue)][packagist]
+![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/nixn/php-util/php)
+[![API docs](https://img.shields.io/badge/API-docs-blue)](https://nixn.github.io/php-util/namespaces/nixn-php.html)
+
+[packagist]: https://packagist.org/packages/nixn/php-util
+
 ## Installation
 Via composer:
 ```
