@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/api-docs.yml'
+      - 'src/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpdoc.dist.xml'
 
 permissions:
   contents: read

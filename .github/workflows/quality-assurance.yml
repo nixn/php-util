@@ -3,6 +3,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/quality-assurance.yml'
+      - 'src/**'
+      - 'tests/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpunit.dist.xml'
+      - 'phpstan.dist.neon'
+      - 'phpstan-tests.neon'
 
 permissions:
   contents: read
