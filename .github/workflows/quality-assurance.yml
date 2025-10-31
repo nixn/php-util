@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   unit-tests:
-    name: PHPUnit tests (PHP ${{ matrix.php }})
+    name: PHPUnit test + cov. (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -31,7 +31,11 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
       - run: ./composer.phar install -n --no-progress -o
-      - run: ./composer.phar test
+      - run: ./composer.phar test+coverage
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
   static-analysis:
     name: PHPStan checks (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
