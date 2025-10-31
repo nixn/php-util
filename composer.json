@@ -1,7 +1,7 @@
 {
     "name": "nixn/php-util",
     "type": "library",
-    "description": "PHP language utilities, mostly to code more in functional style.",
+    "description": "PHP language utilities, mostly to code more in functional style, but also other stuff.",
     "keywords": ["functional", "language", "utilities", "array", "string", "pipe", "with", "partial"],
     "license": "MIT",
     "authors": [

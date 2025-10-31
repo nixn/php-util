@@ -3,10 +3,11 @@ A PHP library with utility functions, mostly useful when coding in functional st
 
 ![GitHub License](https://img.shields.io/github/license/nixn/php-util)
 [![Quality Assurance](https://github.com/nixn/php-util/actions/workflows/quality-assurance.yml/badge.svg)](https://github.com/nixn/php-util/actions/workflows/quality-assurance.yml)
+[![codecov](https://codecov.io/github/nixn/php-util/graph/badge.svg?token=ID9IL3S3HP)](https://codecov.io/github/nixn/php-util)
 [![Packagist Version](https://img.shields.io/packagist/v/nixn/php-util)][packagist]
 [![Packagist Downloads](https://img.shields.io/packagist/dt/nixn/php-util?color=blue)][packagist]
 ![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/nixn/php-util/php)
-[![API docs](https://img.shields.io/badge/API-docs-blue)](https://nixn.github.io/php-util/namespaces/nixn-php.html)
+[![API docs](https://img.shields.io/badge/API-docs-blue)][api-docs]
 
 [packagist]: https://packagist.org/packages/nixn/php-util
 
@@ -16,12 +17,20 @@ Via composer:
 composer require nixn/php-util
 ```
 
+## Documentation
+
+See the [API docs][api-docs].
+
+The (only) namespace is `nixn\php`. All functions (except in the wrappers [`Pipe`][pipe] and [`With`][with]) are static, so they can be called easily
+(e.g. [`Arr::pick($array, 'a', 'b')`](https://nixn.github.io/php-util/classes/nixn-php-Arr.html#method_pick)).
+
+[api-docs]: https://nixn.github.io/php-util/namespaces/nixn-php.html
+[pipe]: https://nixn.github.io/php-util/classes/nixn-php-Pipe.html
+[with]: https://nixn.github.io/php-util/classes/nixn-php-With.html
+
 ## Components
 
-Namespace: `nixn\php`. All functions (except in Pipe) are static, so they can be called easily
-(e.g. `Arr::pick($array, 'a', 'b'))`).
-
-### Arr (ay)
+### [Arr (ay)](https://nixn.github.io/php-util/classes/nixn-php-Arr.html)
 
 * `pick(array $array, string|int ...$keys): array`<br>
   Returns a new array with only the key => value mappings left, whose keys are in $keys.
@@ -81,7 +90,7 @@ else
 // prints: Found value two with key 2
 ```
 
-### Partial
+### [Partial](https://nixn.github.io/php-util/classes/nixn-php-Partial.html)
 
 * `partial(callable $callable, mixed ...$args): callable`<br>
   Returns a new function, which will call the callable with the provided args and can use placeholders for runtime args.
@@ -113,7 +122,7 @@ Str::trim_suffix($str, 'abc') // => "abcdef"
 Str::trim_suffix($str, 'def') // => "abc"
 ```
 
-### Util
+### [Util](https://nixn.github.io/php-util/classes/nixn-php-Util.html)
 
 * `identity(mixed $v): mixed`<br>
   Just returns the input value. Useful in functional programming style.
@@ -175,7 +184,7 @@ $new_color = Util::new(Color::class);
 $color = $new_color(0, 127, 255); // $color instanceof Color
 ```
 
-### Pipe
+### [Pipe](https://nixn.github.io/php-util/classes/nixn-php-Pipe.html)
 
 A `Pipe` object wraps an intial value and pipes it through any function which modifies it.
 The resulting value can be accessed at the end.
@@ -196,7 +205,7 @@ echo (new Pipe('NOW')) // wrap initial value
 // prints: 2026
 ```
 
-### With
+### [With](https://nixn.github.io/php-util/classes/nixn-php-With.html)
 
 A `With` object wraps an object and can be used to call any method on it with chaining support (handled by the wrapper).
 Note that any value returned by the method calls is discarded!
