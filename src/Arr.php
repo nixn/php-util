@@ -99,7 +99,7 @@ final class Arr
 	 * Returns the first mapping (element) of an array as key and value in an array, or null/null if the array is empty.
 	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = Arr::first($array)`
 	 * @param iterable $iterable the source iterable
-	 * @return array{k: string|int|null, v: mixed} ['k' => <key>/null, 'v' => <value>/null]
+	 * @return array{k: string|int|null, v: mixed} ['k' => &lt;key&gt;/null, 'v' => &lt;value&gt;/null]
 	 * @since 1.0
 	 * @phpstan-ignore missingType.iterableValue
 	 */
@@ -115,7 +115,7 @@ final class Arr
 	 * Array destructuring is a very convenient way to handle the result: `['k' => $key, 'v' => $value] = Arr::find($array, 'key1', 'key2')`
 	 * @param array $array the source array
 	 * @param string|int ...$ks the keys
-	 * @return array{k: string|int|null, v: mixed} ['k' => <key>/null, 'v' => <value>/null]
+	 * @return array{k: string|int|null, v: mixed} ['k' => &lt;key&gt;/null, 'v' => &lt;value&gt;/null]
 	 * @since 1.0
 	 * @phpstan-ignore missingType.iterableValue
 	 */

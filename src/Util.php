@@ -65,8 +65,8 @@ final class Util
 	 * @param bool $func whether $fn === null means falsy too
 	 * @param bool $null whether null is a falsy value
 	 * @param bool $false whether false is a falsy value
-	 * @param bool $empty whether an empty string is a falsy value
-	 * @param bool $zero whether 0 (zero) is a falsy value
+	 * @param bool $empty whether an empty string and an empty array are falsy values
+	 * @param bool $zero whether 0 and 0.0 are falsy values
 	 * @return U|T|null the possibly mapped value
 	 * @since 1.0
 	 */
